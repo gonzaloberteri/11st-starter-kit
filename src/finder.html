@@ -1,3 +1,11 @@
+---
+pagination:
+  data: meli.getCategories
+  size: 1
+  alias: category
+tags: categories
+permalink: "/category/{{ category.category.name | slug }}/index.html"
+---
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,29 +13,29 @@
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="assets/favicon/apple-touch-icon.png"
+      href="/assets/favicon/apple-touch-icon.png"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="assets/favicon/favicon-32x32.png"
+      href="/assets/favicon/favicon-32x32.png"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="assets/favicon/favicon-16x16.png"
+      href="/assets/favicon/favicon-16x16.png"
     />
-    <link rel="manifest" href="assets/favicon/site.webmanifest" />
+    <link rel="manifest" href="/assets/favicon/site.webmanifest" />
     <link
       rel="mask-icon"
-      href="assets/favicon/safari-pinned-tab.svg"
+      href="/assets/favicon/safari-pinned-tab.svg"
       color="#5bbad5"
     />
-    <link rel="shortcut icon" href="assets/favicon/favicon.ico" />
+    <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
     <meta name="msapplication-TileColor" content="#da532c" />
-    <meta name="msapplication-config" content="assets/favicon/browserconfig.xml" />
+    <meta name="msapplication-config" content="/assets/favicon/browserconfig.xml" />
     <meta name="theme-color" content="#ffffff" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
@@ -628,7 +636,7 @@
                     <span class="sr-only">Workflow</span>
                     <img
                       class="h-8 w-auto"
-                      src="assets/favicon/android-chrome-192x192.png"
+                      src="/assets/favicon/android-chrome-192x192.png"
                       alt=""
                     />
                   </a>
@@ -801,7 +809,7 @@
 
                                 <div>
                                   <p
-                                    id="Accessories-heading"
+                                  id="Accessories-heading"
                                     class="font-medium text-gray-900"
                                   >
                                     Accessories
@@ -851,7 +859,7 @@
 
                                 <div>
                                   <p
-                                    id="Brands-heading"
+                                  id="Brands-heading"
                                     class="font-medium text-gray-900"
                                   >
                                     Brands
@@ -995,7 +1003,7 @@
                               >
                                 <div>
                                   <p
-                                    id="Clothing-heading"
+                                  id="Clothing-heading"
                                     class="font-medium text-gray-900"
                                   >
                                     Clothing
@@ -1728,7 +1736,7 @@
               <li>
                 <div class="flex items-center">
                   <a href="#" class="mr-4 text-sm font-medium text-gray-900">
-                    Men
+                    {{ category.category.name }}
                   </a>
                   <svg
                     viewBox="0 0 6 20"
@@ -1760,7 +1768,7 @@
         <main class="max-w-2xl mx-auto px-4 lg:max-w-7xl lg:px-8">
           <div class="border-b border-gray-200 pt-8 pb-10">
             <h1 class="text-4xl font-extrabold tracking-tight text-gray-900">
-              New Arrivals
+              {{ category.category.name }}
             </h1>
             <p class="mt-4 text-base text-gray-500">
               Checkout out the latest release of Basic Tees, new and improved
@@ -1769,9 +1777,8 @@
           </div>
           <div class="flex flex-row items-center mt-8 h-9">
             <input
-              class="flex-1 h-9 px-2 shadow-sm rounded border-r-6 border"
-            ></input>
-            <img src="assets/svg/search.svg" alt="" class="h-4 ml-2">
+              class="flex-1 h-9 px-2 shadow-sm rounded border-r-6 border"/>
+            <img src="/assets/svg/search.svg" alt="" class="h-4 ml-2"/>
           </div>
 
           <div
@@ -2112,7 +2119,37 @@
               <div id="container"
                 class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3"
               >
-                <!-- More products... -->
+              {%- for item in category.items -%}
+                <div class="group relative bg-white border border-gray-200 rounded-lg flex flex-col overflow-hidden">
+                  <div
+                    class="aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96"
+                  >
+                    <img
+                      src="{{item.thumbnail}}"
+                      alt="Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green."
+                      class="w-full h-full object-center object-cover sm:w-full sm:h-full"
+                    />
+                  </div>
+                  <div class="flex-1 p-4 space-y-2 flex flex-col">
+                    <h3 class="text-sm font-medium text-gray-900">
+                      <a href="/item/{{ item.id }}/">
+                        <span
+                          aria-hidden="true"
+                          class="absolute inset-0"
+                        ></span>
+                        {{item.title}}
+                      </a>
+                    </h3>
+                    <p class="text-sm text-gray-500">
+                      Get the full lineup of our Basic Tees. Have a fresh shirt
+                      all week, and an extra for laundry day.
+                    </p>
+                    <div class="flex-1 flex flex-col justify-end">
+                      <p class="text-sm italic text-gray-500">8 colors</p>
+                      <p class="text-base font-medium text-gray-900">$256</p>
+                    </div>
+                  </div></div>
+              {%- endfor -%}
               </div>
             </section>
           </div>
@@ -2133,7 +2170,7 @@
                   class="col-span-1 md:col-span-2 lg:row-start-1 lg:col-start-1"
                 >
                   <img
-                    src="assets/favicon/android-chrome-192x192.png"
+                    src="/assets/favicon/android-chrome-192x192.png"
                     alt=""
                     class="h-8 w-auto"
                   />
@@ -2152,19 +2189,19 @@
                       </h3>
                       <ul role="list" class="mt-6 space-y-6">
                         <li class="text-sm">
-                          <a href="/finder.html?category=clothing" class="text-gray-500 hover:text-gray-600">
+                          <a href="/category/clothing/index.html" class="text-gray-500 hover:text-gray-600">
                             Clothing
                           </a>
                         </li>
 
                         <li class="text-sm">
-                          <a href="/finder.html?category=vehicles" class="text-gray-500 hover:text-gray-600">
+                          <a href="/category/vehicles/index.html" class="text-gray-500 hover:text-gray-600">
                             Vehicles
                           </a>
                         </li>
 
                         <li class="text-sm">
-                          <a href="/finder.html?category=electronics" class="text-gray-500 hover:text-gray-600">
+                          <a href="/category/electronics/index.html" class="text-gray-500 hover:text-gray-600">
                             Electronics
                           </a>
                         </li>

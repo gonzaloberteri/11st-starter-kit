@@ -1,3 +1,11 @@
+---
+pagination:
+  data: meli.getAllItems
+  size: 1
+  alias: item
+tags: items
+permalink: "/item/{{ item.id | slug }}/index.html"
+---
 <!DOCTYPE html>
 <html lang="en">
   <head>
